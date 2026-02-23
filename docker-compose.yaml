@@ -11,18 +11,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  app:
-    image: skill-mentor-service:lts
-    container_name: skill-mentor-backend
+  redis:
+    image: redis:alpine
+    container_name: skill-mentor-redis
     ports:
-      - "8085:8081"
-    environment:
-      - DATABASE_URL=jdbc:postgresql://db:5432/skill_mentor_v2
-      - USERNAME=${DB_USERNAME:-postgres}
-      - PASSWORD=${DB_PASSWORD:-password}
-      - SPRING_PROFILES_ACTIVE=dev
-    depends_on:
-      - db
+      - "6379:6379"
 
 volumes:
   postgres_data:
